@@ -1,0 +1,224 @@
+* { margin: 0; }
+html {
+    scroll-behavior: smooth;
+}
+body {
+    background-color: #292828;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif ; color: #ffffff;
+}
+.texo-apresentacao {
+    padding-top: 10px;
+    color: #ffffff;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 25px;
+    text-align: center;
+}
+.capa-tech {
+    padding-top: 20px;
+    background-image: url(../img/capa3.jpg);
+}
+.logo-name-p {
+    position: absolute;
+    left: 20px;
+    display: inline;
+}
+.logo-name1 {
+    color: #ffffff;
+    display: inline;
+}
+.logo-name2 {
+    color: #6d6c6c;
+    display: inline;
+}
+.menu-principal {
+    align-items: center;
+    list-style: none;
+    display: inline;
+}
+.menu-principal ul {
+    display: inline;
+    position: absolute;
+    right: 3%;  
+}
+.menu-principal ul li {
+    display: inline;
+    color: #6d6c6c;
+    padding: 8px;
+}
+.menu-principal ul li a{
+    text-decoration: none;
+    color: #6d6c6c;
+    
+}
+.menu-principal ul li a:hover{
+    color: #ffffff;
+}
+.img-pessoal {
+    text-align: center;
+}
+.texto-nome {
+    font-size: 20px;
+    text-align: center;
+
+}
+.lista-links-icons ul {
+    padding-top: 10px;
+    padding-left: 0;
+    position: relative;
+    text-align: center;
+
+}
+.lista-links-icons ul li {
+    display: inline;
+}
+.lista-links-icons ul li a{
+    
+    text-decoration: none;
+    color: #ffffff;
+    padding: 5px;
+
+}
+ .zoom {
+     overflow: hidden;
+ }
+ .zoom img {
+    max-width: 100%;
+    -moz-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+ }
+ .zoom:hover img {
+     -moz-transform: scale(1.2);
+     -webkit-transform: scale(1.2);
+     transform: scale(1.2);
+ }
+.line {
+    border-right: 2px solid #ffffff;
+    color: #ffffff;
+    margin: 0 auto;
+    white-space:nowrap;
+    overflow: hidden;
+    text-align: center;
+    font-size: 1.50rem;
+}
+ .type-animation {
+     animation: 
+        cursor 500ms steps(28) infinite normal,
+        type 4s steps(28) 1s normal both;
+
+ }
+ @keyframes type {
+     from {
+         width: 0;
+     }
+
+     to {
+         width: 15em;
+     }
+ }
+
+ @keyframes cursor {
+     from {
+         border-right-color: #ffffff;
+     }
+
+     to {
+        border-right-color: transparent;
+     }
+ }
+ .texto-minhas-habilidade {
+     padding-top: 25px;
+     text-align: center;
+
+ }
+ .mark {
+     padding-left: 10px;
+     padding-right: 10px;
+     padding-top: 5px;
+     padding-bottom: 5px;
+     border-style: dotted;
+     background-color: #ffffff;
+     color: #292828;
+     
+ }
+ .img-das-tecnologias ul {
+     padding-top: 40px;
+    padding-left: 0;
+    position: relative;
+    text-align: center;
+
+ }
+ .img-das-tecnologias ul li {
+    
+    display: inline;
+    padding: 15px;
+
+ }
+
+ .zoom1 {
+    overflow: hidden;
+}
+.zoom1 img {
+    max-width: 100%;
+   -moz-transition: all 0.3s;
+   -webkit-transition: all 0.3s;
+   transition: all 0.3s;
+}
+.zoom1:hover img {
+    -moz-transform: scale(1.09);
+    -webkit-transform: scale(1.09);
+    transform: scale(1.09);
+    
+}
+#container {
+    padding-top: 15px;
+    position: relative;
+    width: 350px;
+    height: 341px;
+    text-align: center;
+  }
+  
+#carta {
+    transform-style: preserve-3d;
+    transition: all 0.9s;
+  }
+  
+#container:hover #carta {
+    transform: rotateY(180deg);
+  }
+  
+#frente {
+    position: absolute;
+    backface-visibility: hidden;
+    
+  }
+  
+#atras {
+    position: absolute;
+    backface-visibility: hidden;
+    transform: rotateY(180deg)
+    
+  }
+
+.python ul li{
+    display: inline-block;
+    padding: 22px;
+}
+.python ul {
+    padding-left: 0;
+    text-align: center;
+    
+}
+
+.botoes ul{
+    padding-left: 0;
+    text-align: center;
+    
+}
+.botoes ul li {
+    display: inline;
+    padding: 145px;
+    
+}
+
+

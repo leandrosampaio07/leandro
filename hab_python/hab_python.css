@@ -1,0 +1,51 @@
+* { margin: 0; }
+html {
+    scroll-behavior: smooth;
+}
+body {
+    background-color: #292828;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif ; color: #ffffff;
+}
+
+.container {
+    position: absolute;
+    top: 12%;
+    left: 50%;
+    
+    
+    
+}
+
+.caixa-eletronico {
+    font-size: 15px;
+    color: black;
+    transform: translate(-50%); 
+    height: 520px;
+    width: 1000px;
+    background-color: #ffffff;
+    position:absolute;
+    overflow: auto;
+    
+}
+
+.caixa-eletronico::-webkit-scrollbar {
+
+    width: 15px;
+    border: 1px solid #ffffff;
+
+}
+
+.caixa-eletronico::-webkit-scrollbar-thumb {
+    
+    background-color: #838282;
+    border-radius: 5px;
+    
+}
+
+.botao {
+    position: relative;
+    padding-left: 45%;
+    padding-top: 15px;
+    
+
+}

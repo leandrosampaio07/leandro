@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../hab_python/hab_python.css">
+    <link rel="shortcut icon" href="../img/icon.png" type="image/x-icon">
+    <title>Codigos em python</title>
+</head>
+<body>
+
+    
+    <div class="container">
+        <div class="caixa-eletronico">
+            <code>
+            <pre>
+#CLIENTE 1 LEANDRO -- USER:LEO -- PSS:1111
+#CLIENTE 2 USUARIO-- USER:US2 -- PSS:2222
+#GERENTE -- USER:GER -- PSS:0000
+
+nota100 = 0
+nota50 = 0
+nota20 = 0
+nota10 = 0
+nota5 = 0
+nota2 = 0
+
+valor100 = 100
+valor50 = 50
+valor20 = 20
+valor10 = 10
+valor5 = 5
+valor2 = 2
+
+nomes_usuarios = [['LEANDRO'],['USUARIO2']]
+
+usuarios = [['LEO'],['US2']]
+
+pss_usuarios = [['1111'],['2222']]
+
+gerente = ['GER']
+
+pss_gerente = ['0000']
+
+saldo_cliente = [[0], [0], [0]]
+
+extrato_clientes = [[],[], []]
+
+def excluir_cliente():
+  ap = str(input('Usuario a ser apagado: ')).upper()
+  for c in range(0, len(usuarios)):
+    if ap in usuarios[c]:
+      print(f'Deseja excluir o clinte {nomes_usuarios[c]}')
+      confirmacao = str(input('[S/N]: ')).upper()
+      if confirmacao == 'S':
+        saldo_cliente.pop(c)
+        nomes_usuarios.pop(c)
+        usuarios.pop(c)
+        pss_usuarios.pop(c)
+        print('Usuario excluido com sucesso!!')
+        break
+      elif confirmacao == 'N':
+        break
+      else:
+        print('Opcão invalida!!')
+def add_cliente():
+  nome = str(input('Nome do Cliente: ')).upper()
+  nomes_usuarios.append(nome)
+  us = str(input('Cadastre um Username: ')).upper()
+  usuarios.append(us)
+  pss = str(input('Cadastre uma senha: '))
+  pss_usuarios.append(pss)
+  din = [0]
+  saldo_cliente.append(din)
+  ex = []
+  extrato_clientes.append(ex)  
+def login_gerente():
+    global g
+    g = 999
+    while True:
+        user = input(str('Gerente: ')).upper()
+        for c in range(0, len(gerente)):
+            if user in gerente[c]:
+                g = c
+                break
+        if g == 999:
+            print('Usuario não encontrado')
+        else:
+            break
+          
+    while True:
+        senha = input(str('Password: '))
+        if senha == pss_gerente[g]:
+            print('_____________________________________')
+            print('\n             Bem vindo             ')
+            print()
+            break
+        else:
+            print('Senha incorreta')
+        print()
+def login():
+    global u
+    u = 999
+    while True:
+        user = input(str('Username: ')).upper()
+        for c in range(0, len(usuarios)):
+            if user in usuarios[c]:
+                u = c
+                break
+        if u == 999:
+            print('Usuario não encontrado')
+        else:
+            break
+        
+    while True:
+        senha = input(str('Password: '))
+        if senha in pss_usuarios[u]:
+            print('_____________________________________')
+            print('\n             Bem vindo ',end='')
+            for c in range(0, len(nomes_usuarios[u])):
+                print(f'{nomes_usuarios[u][c].lower()}',end='')
+            print('\n')
+            break    
+        else:
+            print('Senha incorreta')
+        print()
+  
+def mostrar_saldo_banco():
+    
+    saldo_banco = (nota100*valor100)+(nota50*valor50)+(nota20*valor20)+(nota10*valor10)+(nota5* valor5)+(nota2*valor2)
+    
+    print(f'Saldo do Banco -- R${saldo_banco},00')
+
+def mostrar_saldo_usuario():
+    global u
+    print(f'\nCliente: ',end='')
+    for c in range(0, len(nomes_usuarios[u])):
+      print(f'{nomes_usuarios[u][c]}',end='')
+    print(f'\nSaldo em conta: R${saldo_cliente[u][0]},00')
+
+def depositar():
+    print('-------------------------------------')
+    qtd_notas100 = 0
+    qtd_notas50 = 0
+    qtd_notas20 = 0
+    qtd_notas10 = 0
+    qtd_notas5 = 0
+    qtd_notas2 = 0
+    
+    while True:
+        valor_deposito = int(input('Deposito: '))
+        
+        if valor_deposito >= 4:
+            break
+        else:
+            print('Deposito minimo R$ 4,00')
+            
+    saldo_cliente[u][0] = saldo_cliente[u][0] + valor_deposito
+            
+    global extrato
+    frase = str(f'Deposito +R${valor_deposito},00')
+    extrato_clientes[u].append(frase)
+    #NOTAS DE R$100,00
+    if valor_deposito >= 100:
+        if valor_deposito%100 == 1:
+            qtd_notas2 = qtd_notas2 + 3
+            qtd_notas5 = qtd_notas5 + 1
+            valor_deposito = valor_deposito - 11
+            
+        if valor_deposito%100 == 3:
+            qtd_notas2 = qtd_notas2 + 4
+            valor_deposito = valor_deposito - 8
+            
+        qtd_notas100 = valor_deposito // valor100
+        valor_deposito = valor_deposito -(qtd_notas100*valor100)
+        
+    #NOTAS DE R$50,00
+    if valor_deposito >= 50:
+        if valor_deposito%50 == 1:
+            qtd_notas2 = qtd_notas2 + 3
+            qtd_notas5 = qtd_notas5 + 1
+            valor_deposito = valor_deposito - 11
+            
+        if valor_deposito%50 == 3:
+            qtd_notas2 = qtd_notas2 + 4
+            valor_deposito = valor_deposito - 8
+            
+        qtd_notas50 = valor_deposito // valor50
+        valor_deposito = valor_deposito -(qtd_notas50*valor50)
+    
+    #NOTAS DE R$20,00
+    if valor_deposito >= 20:
+        if valor_deposito%20 == 1:
+            qtd_notas2 = qtd_notas2 + 3
+            qtd_notas5 = qtd_notas5 + 1
+            valor_deposito = valor_deposito - 11
+        
+        if valor_deposito%20 == 3:
+            qtd_notas2 = qtd_notas2 + 4
+            valor_deposito = valor_deposito - 8
+        
+        qtd_notas20 = valor_deposito // valor20
+        valor_deposito = valor_deposito -(qtd_notas20*valor20)
+        
+    if valor_deposito == 11:
+        qtd_notas2 = qtd_notas2 + 3
+        qtd_notas5 = qtd_notas5 + 1
+        valor_deposito = 0
+    if valor_deposito == 9:
+        qtd_notas2 = qtd_notas2 + 2
+        qtd_notas5 = qtd_notas5 + 1
+        valor_deposito = 0
+    if valor_deposito == 8 or valor_deposito == 13:
+        qtd_notas2 = qtd_notas2 + 4
+        valor_deposito = valor_deposito - 8
+    if valor_deposito == 7:
+        qtd_notas2 = qtd_notas2 + 1
+        qtd_notas5 = qtd_notas5 + 1
+        valor_deposito = 0
+    
+    #NOTAS DE R$10,00
+    if valor_deposito >= 10:
+        if valor_deposito%10 == 1:
+            qtd_notas2 = qtd_notas2 + 3
+            qtd_notas5 = qtd_notas5 + 1
+            valor_deposito = valor_deposito - 11
+            
+        if valor_deposito%10 == 3:
+            qtd_notas2 = qtd_notas2 + 4
+            valor_deposito = valor_deposito - 8
+        
+        qtd_notas10 = valor_deposito // valor10
+        valor_deposito = valor_deposito -(qtd_notas10*valor10)
+    
+    if valor_deposito == 11:
+        qtd_notas2 = qtd_notas2 + 3
+        qtd_notas5 = qtd_notas5 + 1
+        valor_deposito = 0
+    if valor_deposito == 9:
+        qtd_notas2 = qtd_notas2 + 2
+        qtd_notas5 = qtd_notas5 + 1
+        valor_deposito = 0
+    if valor_deposito == 8 or valor_deposito == 13:
+        qtd_notas2 = qtd_notas2 + 4
+        valor_deposito = valor_deposito - 8
+    if valor_deposito == 7:
+        qtd_notas2 = qtd_notas2 + 1
+        qtd_notas5 = qtd_notas5 + 1
+        valor_deposito = 0
+    
+    #NOTAS DE R$5,00
+    if valor_deposito >= 5:
+        if valor_deposito%5 == 0:
+            qtd_notas5 = valor_deposito // valor5
+            valor_deposito = valor_deposito -(qtd_notas5*valor5)
+        
+    #NOTAS DE R$2,00
+    
+    if valor_deposito >= 2:
+        qtd_notas2 = valor_deposito // valor2
+        valor_deposito = valor_deposito - (qtd_notas2*valor2)
+    if qtd_notas2 > 0:
+        print(f'Notas de 2: {qtd_notas2}')
+    if qtd_notas5 > 0:
+        print(f'Notas de 5: {qtd_notas5}')
+    if qtd_notas10 > 0:
+        print(f'Notas de 10: {qtd_notas10}')
+    if qtd_notas20 > 0:
+        print(f'Notas de 20: {qtd_notas20}')
+    if qtd_notas50 > 0:
+        print(f'Notas de 50: {qtd_notas50}')
+    if qtd_notas100 > 0:
+        print(f'Notas de 100: {qtd_notas100}')
+    
+    global nota100, nota50, nota20, nota10, nota5, nota2
+    
+    nota100 = nota100 + qtd_notas100
+    nota50 = nota50 + qtd_notas50
+    nota20 = nota20 + qtd_notas20
+    nota10 = nota10 + qtd_notas10
+    nota5 = nota5 + qtd_notas5
+    nota2 = nota2 + qtd_notas2
+    print('-------------------------------------')
+    print('')
+    
+def sacar():
+    print('-------------------------------------')    
+    qtd_notas100 = 0
+    qtd_notas50 = 0
+    qtd_notas20 = 0
+    qtd_notas10 = 0
+    qtd_notas5 = 0
+    qtd_notas2 = 0
+    
+    while True:
+        mostrar_saldo_usuario()
+        if saldo_cliente[u][0] < 4:
+          print('Valor para saque indisponivel!')
+          valor_saque = 0
+          break
+        valor_saque = int(input('Saque: '))
+        if valor_saque >= 4:
+            if valor_saque > saldo_cliente[u][0]:
+              print(f'Saque Insulficiente \n valor dispoivel: {saldo_cliente[u][0]},00')
+            else:
+              break
+        else:
+            print('Saque minimo R$ 4,00')  
+
+    saldo_cliente[u][0] = saldo_cliente[u][0] - valor_saque        
+    global extrato
+    frase = str(f'Saque -R${valor_saque},00')
+    extrato_clientes[u].append(frase)
+    
+    #NOTAS DE R$100,00
+    if valor_saque >= 100:
+        if valor_saque%100 == 1:
+            qtd_notas2 = qtd_notas2 + 3
+            qtd_notas5 = qtd_notas5 + 1
+            valor_saque = valor_saque - 11
+            
+        if valor_saque%100 == 3:
+            qtd_notas2 = qtd_notas2 + 4
+            valor_saque = valor_saque - 8
+            
+        qtd_notas100 = valor_saque // valor100
+        valor_saque = valor_saque -(qtd_notas100*valor100)
+        
+    #NOTAS DE R$50,00
+    if valor_saque >= 50:
+        if valor_saque%50 == 1:
+            qtd_notas2 = qtd_notas2 + 3
+            qtd_notas5 = qtd_notas5 + 1
+            valor_saque = valor_saque - 11
+            
+        if valor_saque%50 == 3:
+            qtd_notas2 = qtd_notas2 + 4
+            valor_saque = valor_saque - 8
+            
+        qtd_notas50 = valor_saque// valor50
+        valor_saque = valor_saque -(qtd_notas50*valor50)
+    
+    #NOTAS DE R$20,00
+    if valor_saque >= 20:
+        if valor_saque%20 == 1:
+            qtd_notas2 = qtd_notas2 + 3
+            qtd_notas5 = qtd_notas5 + 1
+            valor_saque = valor_saque - 11
+        
+        if valor_saque%20 == 3:
+            qtd_notas2 = qtd_notas2 + 4
+            valor_saque = valor_saque - 8
+        
+        qtd_notas20 = valor_saque // valor20
+        valor_saque = valor_saque -(qtd_notas20*valor20)
+        
+    if valor_saque == 11:
+        qtd_notas2 = qtd_notas2 + 3
+        qtd_notas5 = qtd_notas5 + 1
+        valor_saque = 0
+    if valor_saque == 9:
+        qtd_notas2 = qtd_notas2 + 2
+        qtd_notas5 = qtd_notas5 + 1
+        valor_saque = 0
+    if valor_saque == 8 or valor_saque == 13:
+        qtd_notas2 = qtd_notas2 + 4
+        valor_saque = valor_saque - 8
+    if valor_saque == 7:
+        qtd_notas2 = qtd_notas2 + 1
+        qtd_notas5 = qtd_notas5 + 1
+        valor_saque = 0
+    
+    #NOTAS DE R$10,00
+    if valor_saque >= 10:
+        if valor_saque%10 == 1:
+            qtd_notas2 = qtd_notas2 + 3
+            qtd_notas5 = qtd_notas5 + 1
+            valor_saque = valor_saque - 11
+            
+        if valor_saque%10 == 3:
+            qtd_notas2 = qtd_notas2 + 4
+            valor_saque = valor_saque - 8
+        
+        qtd_notas10 = valor_saque // valor10
+        valor_saque = valor_saque -(qtd_notas10*valor10)
+    
+    if valor_saque == 11:
+        qtd_notas2 = qtd_notas2 + 3
+        qtd_notas5 = qtd_notas5 + 1
+        valor_saque = 0
+    if valor_saque == 9:
+        qtd_notas2 = qtd_notas2 + 2
+        qtd_notas5 = qtd_notas5 + 1
+        valor_saque = 0
+    if valor_saque == 8 or valor_saque == 13:
+        qtd_notas2 = qtd_notas2 + 4
+        valor_saque = valor_saque - 8
+    if valor_saque == 7:
+        qtd_notas2 = qtd_notas2 + 1
+        qtd_notas5 = qtd_notas5 + 1
+        valor_saque = 0
+    
+    #NOTAS DE R$5,00
+    if valor_saque >= 5:
+        if valor_saque%5 == 0:
+            qtd_notas5 = valor_saque // valor5
+            valor_saque = valor_saque -(qtd_notas5*valor5)
+        
+    #NOTAS DE R$2,00
+    if valor_saque >= 2:
+        qtd_notas2 = valor_saque // valor2
+        valor_saque = valor_saque-(qtd_notas2*valor2)
+        
+    
+    
+    if qtd_notas2 > 0:
+        print(f'Notas de 2: {qtd_notas2}')
+    if qtd_notas5 > 0:
+        print(f'Notas de 5: {qtd_notas5}')
+    if qtd_notas10 > 0:
+        print(f'Notas de 10: {qtd_notas10}')
+    if qtd_notas20 > 0:
+        print(f'Notas de 20: {qtd_notas20}')
+    if qtd_notas50 > 0:
+        print(f'Notas de 50: {qtd_notas50}')
+    if qtd_notas100 > 0:
+        print(f'Notas de 100: {qtd_notas100}')
+    
+    global nota100, nota50, nota20, nota10, nota5, nota2
+    
+    nota100 = nota100 - qtd_notas100
+    nota50 = nota50 - qtd_notas50
+    nota20 = nota20 - qtd_notas20
+    nota10 = nota10 - qtd_notas10
+    nota5 = nota5 - qtd_notas5
+    nota2 = nota2 - qtd_notas2
+    print('-------------------------------------')
+    print('')
+    
+def mostrar_extrato():
+    print('-------------------------------------')
+    print('EXTRATO:')
+    mostrar_saldo_usuario()
+    print()
+    for c in range(0, len(extrato_clientes[u])):
+            print(f'- {extrato_clientes[u][c]}')
+    print('-------------------------------------')
+
+#PROGRAMA PRINCIPAL
+
+def programa_principal():
+  print('_____________________________________\n')
+  print('             BANCO KINGS             ')
+  print('_____________________________________')
+  while True:
+      u = 999
+      i = int(input('             1- Login             \n'
+                    '             2- Manutenção             \n'
+                    '             3- Sair             \n'
+                    '             -> '))
+      if i == 1:
+         print('_____________________________________')
+         print()
+         print('   Realize o Login para prosseguir:    \n')
+         login()
+         while True:
+           op = int(input('             1- Sacar             \n'
+                          '             2- Depositar             \n'
+                          '             3- Extrato             \n'
+                          '             4- Sair             \n'
+                          '             -> '))
+           if op == 1:
+             sacar()
+           elif op == 2:
+             depositar()
+           elif op == 3:
+             mostrar_extrato()
+           elif op == 4:
+             break         
+      elif i == 2:
+         login_gerente()
+         while True:
+           op = int(input('             1- Consultar banco            \n'
+                          '             2- Adicionar Cliente             \n'
+                          '             3- Excluir Cliente             \n'
+                          '             4- sair             \n'
+                          '             -> '))
+           if op == 1:
+             print('_____________________________________')
+             mostrar_saldo_banco()
+             for c in range(0, len(nomes_usuarios)):
+               print(f'{nomes_usuarios[c][0]} --- R${saldo_cliente[c][0]}')
+             print('_____________________________________')
+           elif op == 2:
+             add_cliente()
+           elif op == 3:
+             excluir_cliente()
+           elif op == 4:
+             break
+         
+      elif i == 4:
+         print('Volte Sempre!!')
+         break
+      else:
+         print('Opção Invalida!!')    
+                
+programa_principal()
+            </pre>
+            </code>
+        </div>
+    </div>
+    <div class="botao">
+        <a href="https://www.online-python.com/online_python_compiler" target="_blank"><img src="../img/botao_testar.png" alt=""></a>
+    </div>
+</body>
+</html>
